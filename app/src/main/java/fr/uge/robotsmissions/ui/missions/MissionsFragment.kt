@@ -67,7 +67,8 @@ class MissionsFragment : Fragment(), View.OnClickListener {
             }
 
             override fun onDialogPositiveClick() {
-                adapter.removeAt(position)
+                missions_array.removeAt(position)
+                adapter.notifyDataSetChanged()
             }
         }
         confirmFragment.show(fragmentManager, "confirmDeleteDialog")

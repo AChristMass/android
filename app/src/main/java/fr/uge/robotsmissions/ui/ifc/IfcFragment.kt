@@ -69,7 +69,8 @@ class IfcFragment : Fragment(), View.OnClickListener {
             }
 
             override fun onDialogPositiveClick() {
-                adapter.removeAt(position)
+                ifc_array.removeAt(position)
+                adapter.notifyDataSetChanged()
             }
         }
         confirmFragment.show(fragmentManager, "confirmDeleteDialog")

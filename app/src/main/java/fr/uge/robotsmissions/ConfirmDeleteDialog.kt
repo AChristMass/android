@@ -4,7 +4,11 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
+import android.view.KeyEvent
 import androidx.fragment.app.DialogFragment
+import android.view.KeyEvent.KEYCODE_BACK
+
+
 
 class ConfirmDeleteDialog(val title: String = "") : DialogFragment() {
 
@@ -25,6 +29,10 @@ class ConfirmDeleteDialog(val title: String = "") : DialogFragment() {
             .setNegativeButton("No", DialogInterface.OnClickListener { dialog, id ->
                 listener?.onDialogNegativeClick()
             })
+            .setOnKeyListener { dialog, keyCode, event -> keyCode == KeyEvent.KEYCODE_BACK }
+
         return builder.create()
+
     }
 }
+
