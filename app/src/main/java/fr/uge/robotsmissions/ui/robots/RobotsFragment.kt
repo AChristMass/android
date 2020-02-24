@@ -12,9 +12,12 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import fr.uge.robotsmissions.ConfirmDeleteDialog
+import fr.uge.robotsmissions.R
 import fr.uge.robotsmissions.SwipeDeleteCallback
 import fr.uge.robotsmissions.objects.Robot
+import kotlinx.android.synthetic.main.fragment_robots.*
 import kotlinx.android.synthetic.main.fragment_robots.view.*
+import kotlinx.android.synthetic.main.fragment_robots.view.robot_floatingActionButton
 
 
 class RobotsFragment : Fragment(), View.OnClickListener {
@@ -75,6 +78,8 @@ class RobotsFragment : Fragment(), View.OnClickListener {
 
         val itemTouchHelper = ItemTouchHelper(swipeHandler)
         itemTouchHelper.attachToRecyclerView(root!!.robots_list)
+
+        robot_floatingActionButton.setOnClickListener(this)
     }
 
     private fun showConfirmDialog(position: Int) {
@@ -92,9 +97,14 @@ class RobotsFragment : Fragment(), View.OnClickListener {
         confirmFragment.show(fragmentManager, "confirmDeleteDialog")
     }
 
-    override fun onClick(v: View?) {
-        if (v != null) {
+    override fun onClick(v: View) {
+        if (v.tag != null) {
             showDetails(v.tag as Int)
+        }
+        else {
+            when (v.id) {
+                R.id.robot_floatingActionButton -> println("Button : Robot")
+            }
         }
     }
 

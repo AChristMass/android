@@ -15,6 +15,7 @@ import fr.uge.robotsmissions.ConfirmDeleteDialog
 import fr.uge.robotsmissions.R
 import fr.uge.robotsmissions.SwipeDeleteCallback
 import fr.uge.robotsmissions.objects.Mission
+import kotlinx.android.synthetic.main.fragment_missions.*
 import kotlinx.android.synthetic.main.fragment_missions.view.*
 import java.util.*
 
@@ -57,6 +58,8 @@ class MissionsFragment : Fragment(), View.OnClickListener {
 
         val itemTouchHelper = ItemTouchHelper(swipeHandler)
         itemTouchHelper.attachToRecyclerView(root!!.missions_list)
+
+        mission_floatingActionButton.setOnClickListener(this)
     }
 
     private fun showConfirmDialog(position: Int) {
@@ -74,9 +77,14 @@ class MissionsFragment : Fragment(), View.OnClickListener {
         confirmFragment.show(fragmentManager, "confirmDeleteDialog")
     }
 
-    override fun onClick(v: View?) {
-        if (v != null) {
+    override fun onClick(v: View) {
+        if (v.tag != null) {
             showDetails(v.tag as Int)
+        }
+        else {
+            when (v.id) {
+                R.id.mission_floatingActionButton -> println("Button : Robot")
+            }
         }
     }
 

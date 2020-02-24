@@ -15,7 +15,9 @@ import fr.uge.robotsmissions.ConfirmDeleteDialog
 import fr.uge.robotsmissions.R
 import fr.uge.robotsmissions.SwipeDeleteCallback
 import fr.uge.robotsmissions.objects.Ifc
+import kotlinx.android.synthetic.main.fragment_ifc.*
 import kotlinx.android.synthetic.main.fragment_ifc.view.*
+import kotlinx.android.synthetic.main.fragment_ifc.view.ifc_floatingActionButton
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -59,6 +61,8 @@ class IfcFragment : Fragment(), View.OnClickListener {
 
         val itemTouchHelper = ItemTouchHelper(swipeHandler)
         itemTouchHelper.attachToRecyclerView(root!!.ifc_list)
+
+        ifc_floatingActionButton.setOnClickListener(this)
     }
 
     private fun showConfirmDialog(position: Int) {
@@ -79,6 +83,10 @@ class IfcFragment : Fragment(), View.OnClickListener {
     override fun onClick(v: View) {
         if(v.tag != null)
             showDetails(v.tag as Int)
+        else
+            when(v.id){
+                R.id.ifc_floatingActionButton -> println("Button : IFC")
+            }
     }
 
 
