@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_robots"
+        android:icon="@android:color/transparent"
+        android:title="Robots"
+        android:titleCondensed="true"
+        android:visible="true"
+        app:showAsAction="always|withText" />
+
+    <item
+        android:id="@+id/navigation_missions"
+        android:enabled="true"
+        android:icon="@android:color/transparent"
+        android:title="Missions"
+        android:titleCondensed="true"
+        android:visible="true"
+        app:showAsAction="always|withText" />
+    <item
+        android:id="@+id/navigation_ifc"
+        android:icon="@android:color/transparent"
+        android:title="IFC"
+        android:titleCondensed="true"
+        app:showAsAction="always|withText" />
+
+</menu>

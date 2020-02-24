@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/robot_card_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
+        app:cardBackgroundColor="#F0F0F0">
+
+        <View
+            android:id="@+id/view_topBorder"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#1A000000" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#00140202"
+            android:backgroundTint="#00FFFFFF"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/robot_name_text"
+                style="@style/ItemTitleFont"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="30dp"
+                android:gravity="center|center_vertical"
+                android:text="Robot" />
+
+            <TextView
+                android:id="@+id/robot_ifc_position_name_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/robot_name_text"
+                android:layout_toRightOf="@id/robot_name_text"
+                android:ellipsize="end"
+                android:text="Position"
+                android:textColor="#464646" />
+
+            <TextView
+                android:id="@+id/robot_is_online_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/robot_ifc_position_name_text"
+                android:layout_toEndOf="@id/robot_name_text"
+                android:layout_toRightOf="@id/robot_name_text"
+                android:ellipsize="end"
+                android:text="Online"
+                android:textColor="#464646" />
+
+            <TextView
+                android:id="@+id/robot_battery_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/robot_is_online_text"
+                android:layout_toEndOf="@id/robot_name_text"
+                android:layout_toRightOf="@id/robot_name_text"
+                android:ellipsize="end"
+                android:text="Battery"
+                android:textColor="#464646" />
+
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>
