@@ -18,6 +18,7 @@ import fr.uge.robotsmissions.objects.Ifc
 import kotlinx.android.synthetic.main.fragment_ifc.*
 import kotlinx.android.synthetic.main.fragment_ifc.view.*
 import kotlinx.android.synthetic.main.fragment_ifc.view.ifc_floatingActionButton
+import kotlinx.android.synthetic.main.fragment_robots.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -62,6 +63,7 @@ class IfcFragment : Fragment(), View.OnClickListener {
         val itemTouchHelper = ItemTouchHelper(swipeHandler)
         itemTouchHelper.attachToRecyclerView(root!!.ifc_list)
 
+        ifc_search_button.setOnClickListener(this)
         ifc_floatingActionButton.setOnClickListener(this)
     }
 
@@ -86,7 +88,12 @@ class IfcFragment : Fragment(), View.OnClickListener {
         else
             when(v.id){
                 R.id.ifc_floatingActionButton -> println("Button : IFC")
+                R.id.ifc_search_button -> executeSearch()
             }
+    }
+
+    private fun executeSearch() {
+        println(ifc_search_text.text)
     }
 
 

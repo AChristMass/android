@@ -17,6 +17,7 @@ import fr.uge.robotsmissions.SwipeDeleteCallback
 import fr.uge.robotsmissions.objects.Mission
 import kotlinx.android.synthetic.main.fragment_missions.*
 import kotlinx.android.synthetic.main.fragment_missions.view.*
+import kotlinx.android.synthetic.main.fragment_robots.*
 import java.util.*
 
 class MissionsFragment : Fragment(), View.OnClickListener {
@@ -59,6 +60,7 @@ class MissionsFragment : Fragment(), View.OnClickListener {
         val itemTouchHelper = ItemTouchHelper(swipeHandler)
         itemTouchHelper.attachToRecyclerView(root!!.missions_list)
 
+        mission_search_button.setOnClickListener(this)
         mission_floatingActionButton.setOnClickListener(this)
     }
 
@@ -84,9 +86,15 @@ class MissionsFragment : Fragment(), View.OnClickListener {
         else {
             when (v.id) {
                 R.id.mission_floatingActionButton -> println("Button : Robot")
+                R.id.mission_search_button -> executeSearch()
             }
         }
     }
+
+    private fun executeSearch() {
+        println(mission_search_text.text)
+    }
+
 
     fun showDetails(index: Int) {
         val mission = missions_array[index]

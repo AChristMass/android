@@ -30,9 +30,11 @@ class ConfirmDeleteDialog(val title: String = "") : DialogFragment() {
                 listener?.onDialogNegativeClick()
             })
             .setOnKeyListener { dialog, keyCode, event -> keyCode == KeyEvent.KEYCODE_BACK }
+            .setCancelable(false)
+        val dialog: Dialog = builder.create()
+        dialog.setCanceledOnTouchOutside(false)
+        return dialog
 
-        return builder.create()
-
-    }
+        }
 }
 

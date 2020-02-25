@@ -42,13 +42,7 @@ class RobotsFragment : Fragment(), View.OnClickListener {
         Robot("Robot 14", "a", true, 100F),
         Robot("Robot 15", "a", true, 100F),
         Robot("Robot 16", "a", true, 100F),
-        Robot("Robot 17", "a", true, 100F),
-        Robot("Robot 18", "a", true, 100F),
-        Robot("Robot 19", "a", true, 100F),
-        Robot("Robot 20", "a", true, 100F),
-        Robot("Robot 21", "a", true, 100F),
-        Robot("Robot 22", "a", true, 100F),
-        Robot("Robot 23", "a", true, 100F)
+        Robot("Robot 17", "a", true, 100F)
     )
 
     override fun onCreateView(
@@ -79,6 +73,7 @@ class RobotsFragment : Fragment(), View.OnClickListener {
         val itemTouchHelper = ItemTouchHelper(swipeHandler)
         itemTouchHelper.attachToRecyclerView(root!!.robots_list)
 
+        robot_search_button.setOnClickListener(this)
         robot_floatingActionButton.setOnClickListener(this)
     }
 
@@ -104,8 +99,13 @@ class RobotsFragment : Fragment(), View.OnClickListener {
         else {
             when (v.id) {
                 R.id.robot_floatingActionButton -> println("Button : Robot")
+                R.id.robot_search_button -> executeSearch()
             }
         }
+    }
+
+    private fun executeSearch() {
+        println(robot_search_text.text)
     }
 
     fun showDetails(index: Int) {

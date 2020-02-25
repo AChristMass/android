@@ -5,22 +5,54 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/missions_list"
+    <RelativeLayout
+        android:id="@+id/mission_relative_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingBottom="?attr/actionBarSize"
-        tools:listitem="@layout/item_mission" >
+        android:layout_height="match_parent">
 
-    </androidx.recyclerview.widget.RecyclerView>
+        <LinearLayout
+            android:id="@+id/mission_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/mission_search_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="@android:string/search_go"
+                android:inputType="text" />
+
+            <ImageButton
+                android:id="@+id/mission_search_button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:background="#00FFFFFF"
+                android:tint="@color/colorPrimaryDark"
+                app:srcCompat="@android:drawable/ic_menu_search" />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/missions_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/mission_search"
+            android:paddingBottom="?attr/actionBarSize"
+            tools:listitem="@layout/item_mission">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
         android:layout_marginRight="24dp"
-        android:layout_marginBottom="24dp"
-        app:layout_anchor="@id/missions_list"
-        app:layout_anchorGravity="bottom|right">
+        android:layout_marginBottom="24dp">
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/mission_floatingActionButton"
