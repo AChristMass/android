@@ -85,7 +85,7 @@ class MissionsFragment : Fragment(), View.OnClickListener {
         }
         else {
             when (v.id) {
-                R.id.mission_floatingActionButton -> println("Button : Mission")
+                R.id.mission_floatingActionButton -> println("Button : Robot")
                 R.id.mission_search_button -> executeSearch()
             }
         }
