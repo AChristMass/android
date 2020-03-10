@@ -1,0 +1,1 @@
+java -jar swagger-codegen-cli.jar generate -l java -i swagger-scheme.yaml -o ../apiswagger -c config.json

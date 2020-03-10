@@ -1,9 +1,25 @@
 <resources>
-    <string name="app_name">Robots Missions</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
-
-    <string name="title_robots">Robots</string>
+    <string name="app_name">Robot Missions</string>
     <string name="title_missions">Missions</string>
     <string name="title_ifc">Ifc</string>
+    <string name="title_robots">Robots</string>
+    <string name="is_offline">Offline</string>
+    <string name="is_online">Online</string>
+    <string name="ifc_name">Name :</string>
+    <string name="last_upload">Last upload :</string>
+    <string name="doc_provider_root_title">Documents</string>
+    <string name="ifc_file_select">Select a new file</string>
+    <string name="text_name">Name</string>
+    <string name="mission_ifc">"Ifc : "</string>
+    <string name="start_position">Start position</string>
+    <string name="end_position">End position</string>
+    <string name="ifc_view_name">Ifc name : %1$s</string>
+    <string name="bad_tap">Please tap on a correct position</string>
+    <string name="please_select_position">You need to select position for start and end.</string>
+    <string name="selected_file">Selected file :</string>
+    <string name="ifc_need_to_select_file">No file selected</string>
+    <string name="ifc_file_not_ifc">Please select an ifc file</string>
+    <string name="name_empty">Name should not be empty</string>
+    <string name="robot_no_status">Robot status unknown</string>
+    <string name="robot_battery">Battery %1$d\%</string>
 </resources>

@@ -3,23 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_robots">
+    app:startDestination="@+id/navigation_ifc">
 
     <fragment
-        android:id="@+id/navigation_robots"
-        android:label="@string/title_robots"
-        android:name="fr.uge.robotsmissions.ui.robots.RobotsFragment"
+        android:id="@+id/navigation_ifc"
+        android:name="fr.igm.robotmissions.ui.ifc.IfcFragment"
+        android:label="@string/title_ifc"
         tools:layout="@layout/fragment_ifc" />
 
     <fragment
         android:id="@+id/navigation_missions"
+        android:name="fr.igm.robotmissions.ui.missions.MissionsFragment"
         android:label="@string/title_missions"
-        android:name="fr.uge.robotsmissions.ui.missions.MissionsFragment"
-        tools:layout="@layout/fragment_robots" />
+        tools:layout="@layout/fragment_missions" />
 
     <fragment
-        android:id="@+id/navigation_ifc"
-        android:label="@string/title_ifc"
-        android:name="fr.uge.robotsmissions.ui.ifc.IfcFragment"
-        tools:layout="@layout/fragment_missions" />
+        android:id="@+id/navigation_robots"
+        android:name="fr.igm.robotmissions.ui.robots.RobotsFragment"
+        android:label="@string/title_robots"
+        tools:layout="@layout/fragment_robots" />
 </navigation>

@@ -1,30 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".ui.missions.MissionDetails">
+    android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+    android:layout_marginVertical="@dimen/activity_vertical_margin"
+    >
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/mission_toolbar"
+    <LinearLayout
+        android:id="@+id/namelinearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:titleTextColor="#FFFFFF" />
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="@string/text_name"
+            android:textSize="@dimen/form_field_text_size"
+            android:textStyle="bold" />
+        <EditText
+            android:id="@+id/mission_name_edit_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:ems="10"
+            android:visibility="gone"
+            android:hint="@string/text_name" />
 
-    <TextView
-        android:id="@+id/mission_ifc_target"
+        <TextView
+            android:id="@+id/mission_name_detail_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:ems="10"
+            android:hint="@string/text_name"
+            android:inputType="none" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/mission_ifc_name_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:baselineAligned="false"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/namelinearLayout">
 
-    <TextView
-        android:id="@+id/mission_last_launched"
-        android:layout_height="wrap_content"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="@string/mission_ifc"
+            android:textSize="@dimen/form_field_text_size"
+            android:textStyle="bold" />
+        <Spinner
+            android:id="@+id/mission_ifc_name_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:ems="5" />
+    </LinearLayout>
+
+
+    <fr.igm.robotmissions.ui.ifc.IfcView
+        android:id="@+id/mission_ifc_data_view"
         android:layout_width="match_parent"
-        />
-</LinearLayout>
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mission_ifc_name_layout" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/mission_save_button"
+        app:layout_constraintBottom_toTopOf="@id/mission_edit_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        app:srcCompat="@drawable/ic_save_black_24dp"
+        android:visibility="gone"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
+        android:onClick="saveButtonClick"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/mission_edit_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_edit_24dp"
+        android:onClick="floatingButtonClick"
+        android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
+        android:layout_marginVertical="@dimen/activity_vertical_margin"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

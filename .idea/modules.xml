@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Robots Missions.iml" filepath="$PROJECT_DIR$/Robots Missions.iml" />
-      <module fileurl="file://$PROJECT_DIR$/android-Robots Missions.iml" filepath="$PROJECT_DIR$/android-Robots Missions.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/android-app.iml" filepath="$PROJECT_DIR$/app/android-app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Robotmissions.iml" filepath="$PROJECT_DIR$/Robotmissions.iml" group="Robotmissions" />
+      <module fileurl="file://$PROJECT_DIR$/apiswagger/android_application-apiswagger.iml" filepath="$PROJECT_DIR$/apiswagger/android_application-apiswagger.iml" group="Robotmissions/apiswagger" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="Robotmissions/app" />
     </modules>
   </component>
 </project>

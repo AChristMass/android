@@ -29,13 +29,13 @@
 
             <TextView
                 android:id="@+id/ifc_name_text"
-                style="@style/ItemTitleFont"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="30dp"
                 android:gravity="center|center_vertical"
-                tools:text="IFC" />
+                tools:text="IFC"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/ifc_last_upload_text"

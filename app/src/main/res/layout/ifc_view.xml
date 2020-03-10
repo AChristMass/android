@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ifc_view_floor_spinner"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/ifc_view_start_position_layout"
+        app:layout_constraintTop_toBottomOf="@id/ifc_view_floor_spinner">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/start_position"/>
+        <fr.igm.robotmissions.ui.utils.StateImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ifc_view_start_focus_button"
+            app:srcCompat="@drawable/ic_focus_24dp"/>
+        <fr.igm.robotmissions.ui.utils.StateImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ifc_view_start_edit_button"
+            app:srcCompat="@drawable/ic_edit_24dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/ifc_view_end_position_layout"
+        app:layout_constraintTop_toBottomOf="@id/ifc_view_start_position_layout">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/end_position"/>
+        <fr.igm.robotmissions.ui.utils.StateImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ifc_view_end_focus_button"
+            app:srcCompat="@drawable/ic_focus_24dp"/>
+        <fr.igm.robotmissions.ui.utils.StateImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ifc_view_end_edit_button"
+            app:srcCompat="@drawable/ic_edit_24dp"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ifc_view_name"
+        android:text="@string/ifc_view_name"
+        app:layout_constraintTop_toBottomOf="@id/ifc_view_end_position_layout"
+        android:textStyle="italic"/>
+
+    <fr.igm.robotmissions.ui.ifc.IfcDataView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/ifc_view_data"
+        app:layout_constraintTop_toBottomOf="@id/ifc_view_name"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
