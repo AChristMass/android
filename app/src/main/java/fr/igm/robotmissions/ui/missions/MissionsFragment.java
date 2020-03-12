@@ -80,16 +80,8 @@ public class MissionsFragment extends Fragment implements Addable, Searchable {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            restartFragment();
+            search("");
         }
-    }
-
-    private void restartFragment() {
-        getParentFragmentManager()
-                .beginTransaction()
-                .detach(this)
-                .attach(this)
-                .commit();
     }
 
 }

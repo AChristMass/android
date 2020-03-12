@@ -37,8 +37,19 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/robot_type_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/robot_name_text"
+                android:layout_toRightOf="@id/robot_name_text"
+                android:ellipsize="end"
+                android:text="Type"
+                android:textColor="#464646" />
+
+            <TextView
                 android:id="@+id/robot_is_online_text"
                 android:layout_width="wrap_content"
+                android:layout_below="@id/robot_type_text"
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@id/robot_name_text"
                 android:layout_toRightOf="@id/robot_name_text"

@@ -196,4 +196,9 @@ public class IfcView extends ConstraintLayout {
     public float[] getEndPosition() {
         return ifcDataView.getEnd();
     }
+
+    public void setRobotPosition(int[] robotPos) {
+        ifcDataView.setRobot(robotPos);
+        ifcDataView.updateView();
+    }
 }

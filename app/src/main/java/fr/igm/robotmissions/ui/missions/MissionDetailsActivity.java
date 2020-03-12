@@ -76,7 +76,7 @@ public class MissionDetailsActivity extends AppCompatActivity {
             }
         });
 
-        ifcSpinnerAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item);
+        ifcSpinnerAdapter = new ArrayAdapter<>(getBaseContext(), android.R.layout.simple_spinner_dropdown_item);
         ifcSpinner = findViewById(R.id.mission_ifc_name_spinner);
         ifcSpinner.setAdapter(ifcSpinnerAdapter);
 

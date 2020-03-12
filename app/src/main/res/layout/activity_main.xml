@@ -65,8 +65,7 @@
         android:layout_marginBottom="@dimen/add_fab_bottom_margin"
         android:tint="#FFFFFF"
         android:layout_gravity="bottom|end"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
-        app:srcCompat="@drawable/ic_add_24px"/>
+        app:srcCompat="@drawable/ic_add_black_24dp"/>
 
 
 

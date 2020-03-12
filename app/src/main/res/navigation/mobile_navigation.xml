@@ -22,4 +22,10 @@
         android:name="fr.igm.robotmissions.ui.robots.RobotsFragment"
         android:label="@string/title_robots"
         tools:layout="@layout/fragment_robots" />
+
+    <fragment
+        android:id="@+id/navigation_inprog"
+        android:name="fr.igm.robotmissions.ui.inprog.InProgFragment"
+        android:label="@string/title_inprog"
+        tools:layout="@layout/fragment_inprog" />
 </navigation>

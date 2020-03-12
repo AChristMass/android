@@ -2,7 +2,9 @@ package fr.igm.robotmissions.ui.ifc;
 
 import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -10,6 +12,9 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PorterDuff;
+import android.graphics.Rect;
+import android.graphics.RectF;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -36,6 +41,7 @@ import static android.view.MotionEvent.ACTION_UP;
 
 public class IfcDataView extends View implements View.OnTouchListener {
 
+    private final ScaleListener mScaleListener;
     private Paint paint;
     private Paint shadowPaint;
     private IfcData ifcData;
@@ -62,15 +68,20 @@ public class IfcDataView extends View implements View.OnTouchListener {
 
     private int width, height;
 
+    private RectF robotRectF = new RectF();
+    private int[] robot;
+    private Drawable robotDrawable;
+
     public IfcDataView(Context context, AttributeSet attrs) {
         super(context, attrs);
         paint = new Paint();
         shadowPaint = new Paint(0);
         shadowPaint.setColor(0xff101010);
         shadowPaint.setMaskFilter(new BlurMaskFilter(8, BlurMaskFilter.Blur.NORMAL));
-        mScaleDetector = new ScaleGestureDetector(context, new ScaleListener());
+        mScaleListener = new ScaleListener();
+        mScaleDetector = new ScaleGestureDetector(context, mScaleListener);
         setOnTouchListener(this);
-
+        robotDrawable = getResources().getDrawable(R.drawable.ic_android_black_24dp);
     }
 
     public void setIfcData(IfcData ifcData) {
@@ -90,6 +101,7 @@ public class IfcDataView extends View implements View.OnTouchListener {
     public void resetTransformation() {
         pathMatrix = new Matrix();
         scaleByRatio();
+        mScaleListener.scaleFactor = 1f;
     }
 
     public void drawOnCanvas() {
@@ -122,8 +134,14 @@ public class IfcDataView extends View implements View.OnTouchListener {
         // draw points
         drawPoint(start, getResources().getColor(R.color.startPointColor));
         drawPoint(end, getResources().getColor(R.color.endPointColor));
-
-
+        drawPoint(robot, getResources().getColor(R.color.wallColor));
+    }
+    
+    private void drawPoint(int[] point, int color) {
+        Log.d("points", "draw " + Arrays.toString(point));
+        if (point == null)
+            return;
+        drawPoint(new float[]{point[0], point[1]}, color);
     }
 
     private void drawPoint(float[] point, int color) {
@@ -132,7 +150,7 @@ public class IfcDataView extends View implements View.OnTouchListener {
             return;
         paint.setColor(color);
         paint.setStyle(Paint.Style.FILL);
-        paint.setStrokeWidth(15);
+        paint.setStrokeWidth(15/ratio);
         canvas.drawPoint((float) (point[0] - ifcData.getDimensions().getxMin()),
                 (float) (point[1] - ifcData.getDimensions().getyMin()), paint);
     }
@@ -301,6 +319,10 @@ public class IfcDataView extends View implements View.OnTouchListener {
         updateView();
     }
 
+    public void setRobot(int[] robotPos) {
+        this.robot = robotPos;
+    }
+
     public class ScaleListener
             extends ScaleGestureDetector.SimpleOnScaleGestureListener {
         float lastFocusX, lastFocusY;
@@ -344,7 +366,9 @@ public class IfcDataView extends View implements View.OnTouchListener {
             return true;
         }
 
-
+        public float getScaleFactor() {
+            return scaleFactor;
+        }
     }
 
     public String getCurrentFloor() {

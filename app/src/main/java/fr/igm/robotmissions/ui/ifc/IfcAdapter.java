@@ -50,7 +50,7 @@ public class IfcAdapter extends RecyclerView.Adapter<IfcAdapter.ViewHolder> {
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_ifc, parent, false);
-        return new ViewHolder(itemView);
+        return new IfcAdapter.ViewHolder(itemView);
     }
 
     @Override

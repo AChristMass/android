@@ -22,4 +22,11 @@
     <string name="name_empty">Name should not be empty</string>
     <string name="robot_no_status">Robot status unknown</string>
     <string name="robot_battery">Battery %1$d\%</string>
+    <string name="title_inprog">Missions In Progress</string>
+    <string name="channel_name">name</string>
+    <string name="channel_description">desc</string>
+    <string name="no_missions">No mission available</string>
+    <string name="no_robot">No robot available</string>
+    <string name="text_robot">Robot : </string>
+    <string name="text_mission">Mission : </string>
 </resources>

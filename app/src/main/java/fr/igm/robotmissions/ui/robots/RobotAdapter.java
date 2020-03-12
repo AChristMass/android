@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.CollationElementIterator;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +32,7 @@ public class RobotAdapter extends RecyclerView.Adapter<RobotAdapter.ViewHolder> 
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
+        TextView typeView;
         View cardView;
         TextView nameView;
         TextView batteryView;
@@ -39,6 +41,7 @@ public class RobotAdapter extends RecyclerView.Adapter<RobotAdapter.ViewHolder> 
             super(itemView);
             cardView = itemView.findViewById(R.id.robot_card_view);
             nameView = cardView.findViewById(R.id.robot_name_text);
+            typeView = cardView.findViewById(R.id.robot_type_text);
             isOnlineView = cardView.findViewById(R.id.robot_is_online_text);
             batteryView = cardView.findViewById(R.id.robot_battery_text);
         }
@@ -63,6 +66,7 @@ public class RobotAdapter extends RecyclerView.Adapter<RobotAdapter.ViewHolder> 
         holder.nameView.setText(robot.getName());
         Resources res = context.getResources();
         int onlineStrId = robot.isConnected() ? R.string.is_online : R.string.is_offline;
+        holder.typeView.setText(robot.getType());
         holder.isOnlineView.setText(res.getString(onlineStrId));
         if (robot.getStatus() != null){
             holder.batteryView.setText(

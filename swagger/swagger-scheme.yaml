@@ -145,6 +145,59 @@ paths:
                 items:
                   $ref: "#/components/schemas/Robot"
 
+  /robot/api/list/available:
+    get:
+      tags:
+      - "robot"
+      summary: "List robot uploaded"
+      description: ""
+      operationId: "listRobotAvailable"
+      responses:
+        200:
+          description: "successful operation"
+          content:
+            application/json:
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/Robot"
+
+  /mission/api/list/inprog:
+    get:
+      tags:
+      - "mission"
+      summary: "List mission uploaded"
+      description: ""
+      operationId: "listMissionInProg"
+      responses:
+        200:
+          description: "successful operation"
+          content:
+            application/json:
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/MissionInProg"
+
+  /mission/api/start/:
+    post:
+      tags:
+      - "mission"
+      summary: "Post new mission"
+      description: ""
+      operationId: "startMission"
+      requestBody :
+        $ref: "#/components/requestBodies/StartMissionPostBody"
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MissionInProg"
+        400:
+          description: "Invalid parameters"
+
+
 
   # ADD / MODIFY
   /ifc/api/{ifcId}/:
@@ -377,7 +430,7 @@ components:
                 type: integer
               end_y:
                 type: integer
-    SendMissionPostBody:
+    StartMissionPostBody:
       required: true
       content:
         multipart/form-data:
@@ -386,6 +439,8 @@ components:
             properties:
               robot_uuid:
                 type: string
+              mission_id:
+                type: integer
   schemas:
     Ifc:
       type: "object"
@@ -445,6 +500,28 @@ components:
         rotation: 
           type: number
           format: float
+
+    MissionInProg:
+      type: "object"
+      properties:
+        id:
+          type: integer
+        mission: 
+          $ref: "#/components/schemas/DeplacementMission"
+        robot: 
+          $ref: "#/components/schemas/Robot"
+        is_done:
+          type: boolean
+        started_at:
+          type: "string"
+          format: "date-time"
+        ended_at:
+          type: "string"
+          format: "date-time"
+        x:
+          type: integer
+        y:
+          type: integer
 
 
 

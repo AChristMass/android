@@ -42,7 +42,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@id/ifc_name_text"
-                android:layout_toRightOf="@id/ifc_name_text"
                 android:ellipsize="end"
                 android:textColor="#464646"
                 tools:text="Last upload" />
