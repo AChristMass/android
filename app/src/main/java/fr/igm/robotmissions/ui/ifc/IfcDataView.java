@@ -1,10 +1,7 @@
 package fr.igm.robotmissions.ui.ifc;
 
-import android.animation.ObjectAnimator;
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -12,18 +9,14 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PorterDuff;
-import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.widget.Toast;
-
-import androidx.annotation.RequiresApi;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -71,6 +64,7 @@ public class IfcDataView extends View implements View.OnTouchListener {
     private RectF robotRectF = new RectF();
     private int[] robot;
     private Drawable robotDrawable;
+    private int offset = 40;
 
     public IfcDataView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -91,7 +85,7 @@ public class IfcDataView extends View implements View.OnTouchListener {
         double ifcWidth = ifcData.getDimensions().getWidth();
         double ifcHeight = ifcData.getDimensions().getHeight();
 
-        bmp = Bitmap.createBitmap((int) ifcWidth + 20, (int) ifcHeight + 20, Bitmap.Config.ARGB_8888);
+        bmp = Bitmap.createBitmap((int) ifcWidth + offset*2, (int) ifcHeight + offset*2, Bitmap.Config.ARGB_8888);
         canvas.setBitmap(bmp);
         resetTransformation();
         updatePaths();
@@ -100,8 +94,7 @@ public class IfcDataView extends View implements View.OnTouchListener {
 
     public void resetTransformation() {
         pathMatrix = new Matrix();
-        scaleByRatio();
-        mScaleListener.scaleFactor = 1f;
+        fixMatrix();
     }
 
     public void drawOnCanvas() {
@@ -136,7 +129,7 @@ public class IfcDataView extends View implements View.OnTouchListener {
         drawPoint(end, getResources().getColor(R.color.endPointColor));
         drawPoint(robot, getResources().getColor(R.color.wallColor));
     }
-    
+
     private void drawPoint(int[] point, int color) {
         Log.d("points", "draw " + Arrays.toString(point));
         if (point == null)
@@ -181,17 +174,20 @@ public class IfcDataView extends View implements View.OnTouchListener {
         doorsPath = getPath(floor.getDoorsPolygons().values());
     }
 
-    private void scaleByRatio() {
+    private void fixMatrix() {
         if (ifcData == null)
             return;
-        double ifcWidth = ifcData.getDimensions().getWidth() + 50;
-        double ifcHeight = ifcData.getDimensions().getHeight() + 50;
+        double ifcWidth = ifcData.getDimensions().getWidth() + offset;
+        double ifcHeight = ifcData.getDimensions().getHeight() + offset;
         if (width > height) {
             ratio = (float) (height / ifcHeight);
         } else {
             ratio = (float) (width / ifcWidth);
         }
         pathMatrix.setScale(ratio, ratio);
+        pathMatrix.postScale(1, -1);
+        pathMatrix.postTranslate(offset*ratio, (float) (ifcHeight)*ratio);
+        mScaleListener.scaleFactor = 1f;
     }
 
     @Override
@@ -300,7 +296,7 @@ public class IfcDataView extends View implements View.OnTouchListener {
         super.onSizeChanged(w, h, oldw, oldh);
         width = w;
         height = h;
-        scaleByRatio();
+        resetTransformation();
     }
 
     private void focusPoint(float[] point) {
