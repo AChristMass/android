@@ -76,28 +76,33 @@
         app:layout_constraintTop_toBottomOf="@+id/mission_ifc_name_layout" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/mission_save_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/mission_save_button"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:onClick="saveButtonClick"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
+        android:visibility="gone"
+        app:backgroundTint="@color/colorPrimary"
         app:layout_constraintBottom_toTopOf="@id/mission_edit_button"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="@dimen/activity_horizontal_margin"
+        app:rippleColor="#FFFFFF"
         app:srcCompat="@drawable/ic_save_black_24dp"
-        android:visibility="gone"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
-        android:onClick="saveButtonClick"/>
+        app:tint="@color/white"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/mission_edit_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/mission_edit_button"
+        android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+        android:layout_marginVertical="@dimen/activity_vertical_margin"
+        android:onClick="floatingButtonClick"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
+        app:backgroundTint="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_edit_24dp"
-        android:onClick="floatingButtonClick"
-        android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
-        android:layout_marginVertical="@dimen/activity_vertical_margin"/>
+        app:tint="@color/white"/>
 
 
 
