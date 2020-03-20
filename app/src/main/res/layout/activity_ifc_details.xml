@@ -130,7 +130,7 @@
         app:backgroundTint="@color/colorLight"
         app:layout_constraintBottom_toTopOf="@id/ifc_edit_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_save_white_24dp"
+        app:srcCompat="@drawable/ic_save_black_24dp"
         app:tint="@color/white"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -144,7 +144,7 @@
         app:backgroundTint="@color/colorLight"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_edit_white_24dp"
+        app:srcCompat="@drawable/ic_edit_black_24dp"
         app:tint="@color/white"/>
 
 
