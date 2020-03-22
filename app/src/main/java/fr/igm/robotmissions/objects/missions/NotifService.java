@@ -24,7 +24,8 @@ public class NotifService extends Service {
     private WebSocket webSocket;
     private NotifListener notifListener;
     private Handler handler = new Handler(Looper.getMainLooper());
-
+    
+    //création d'un client ou utilisateur
     @Override
     public void onCreate() {
         super.onCreate();
@@ -52,6 +53,7 @@ public class NotifService extends Service {
                 stopSelf();
                 break;
         }
+        //stopper le service et ne pas le relancer
         return START_NOT_STICKY;
     }
 
