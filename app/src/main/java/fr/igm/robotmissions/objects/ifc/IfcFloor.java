@@ -11,12 +11,13 @@ import java.util.Map;
 
 public class IfcFloor implements Serializable {
 
+    
     @SerializedName("spacesInfos")
     private Map<String, IfcSpaceInfo> spacesInfos;
 
     @SerializedName("spacesPolygons")
     private Map<String, ArrayList<IfcPoint>> spacesPolygons;
-
+     
     @SerializedName("doorsPolygons")
     private Map<String, ArrayList<IfcPoint>> doorsPolygons;
 
@@ -32,7 +33,7 @@ public class IfcFloor implements Serializable {
         return spacesInfos;
     }
 
-
+    //affichage des informations liées à l'ifc
     @Override
     public String toString() {
         return "IfcFloor{" +
