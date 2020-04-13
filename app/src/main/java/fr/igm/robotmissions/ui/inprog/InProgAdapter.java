@@ -33,23 +33,6 @@ public class InProgAdapter extends RecyclerView.Adapter<InProgAdapter.ViewHolder
         notifyDataSetChanged();
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder {
-        View cardView;
-        TextView missionNameView;
-        TextView robotNameView;
-        TextView startedTextView;
-        ImageView stateImageView;
-
-        ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            stateImageView = itemView.findViewById(R.id.inprog_state_image);
-            cardView = itemView.findViewById(R.id.inprog_card_view);
-            missionNameView = itemView.findViewById(R.id.inprog_mission_name);
-            robotNameView = itemView.findViewById(R.id.inprog_robot_name);
-            startedTextView = itemView.findViewById(R.id.inprog_started_text);
-        }
-    }
-
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -65,7 +48,7 @@ public class InProgAdapter extends RecyclerView.Adapter<InProgAdapter.ViewHolder
         // set item text
         holder.missionNameView.setText(mIP.getMission().getName());
         holder.robotNameView.setText(mIP.getRobot().getName());
-        holder.startedTextView.setText( Utils.formatDateString(mIP.getStartedAt()));
+        holder.startedTextView.setText(Utils.formatDateString(mIP.getStartedAt()));
         if (mIP.isIsDone()) {
             holder.stateImageView.setImageResource(R.drawable.ic_done_black_24dp);
         }
@@ -83,6 +66,23 @@ public class InProgAdapter extends RecyclerView.Adapter<InProgAdapter.ViewHolder
     @Override
     public int getItemCount() {
         return missionInProgList.size();
+    }
+
+    static class ViewHolder extends RecyclerView.ViewHolder {
+        View cardView;
+        TextView missionNameView;
+        TextView robotNameView;
+        TextView startedTextView;
+        ImageView stateImageView;
+
+        ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            stateImageView = itemView.findViewById(R.id.inprog_state_image);
+            cardView = itemView.findViewById(R.id.inprog_card_view);
+            missionNameView = itemView.findViewById(R.id.inprog_mission_name);
+            robotNameView = itemView.findViewById(R.id.inprog_robot_name);
+            startedTextView = itemView.findViewById(R.id.inprog_started_text);
+        }
     }
 
 

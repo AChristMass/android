@@ -17,14 +17,13 @@ public class NotifService extends Service {
     public final static String START_FOLLOWING_MISSION = "START_FOLLOWING";
     public static final String STOP_WATCHING = "STOP_WATCHING";
     public static final String EXTRA_MISSION_ID = "EXTRA_MISSION_ID";
-    private final IBinder mIBinder = new LocalBinder();
     private final static String BASE_URL = "ws://35.210.237.250/usersocket/";
-
+    private final IBinder mIBinder = new LocalBinder();
     private OkHttpClient client;
     private WebSocket webSocket;
     private NotifListener notifListener;
     private Handler handler = new Handler(Looper.getMainLooper());
-    
+
     //création d'un client ou utilisateur
     @Override
     public void onCreate() {
@@ -63,8 +62,7 @@ public class NotifService extends Service {
     }
 
 
-
-    private void closeSocket(){
+    private void closeSocket() {
         if (webSocket != null) {
             webSocket.close(1000, null);
             webSocket = null;
@@ -73,7 +71,7 @@ public class NotifService extends Service {
 
     public WebSocket startWatching(String url) {
         Request request = new Request.Builder().url(url).build();
-        Log.i("notif", "url:"+url);
+        Log.i("notif", "url:" + url);
         notifListener = new NotifListener(this, handler);
         return client.newWebSocket(request, notifListener);
     }
@@ -83,16 +81,14 @@ public class NotifService extends Service {
         return mIBinder;
     }
 
-    public class LocalBinder extends Binder
-    {
-        public NotifService getInstance()
-        {
-            return NotifService.this;
-        }
-    }
-
     public void setMissionHandler(MissionNotifHandler missionHandler) {
         Log.i("notif", "set mission handler");
         notifListener.setMessageHandler(missionHandler);
+    }
+
+    public class LocalBinder extends Binder {
+        public NotifService getInstance() {
+            return NotifService.this;
+        }
     }
 }

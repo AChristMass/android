@@ -26,13 +26,14 @@ public class IfcDimensions implements Serializable {
         return yMin;
     }
 
-//calcul de la largeur de la piece
-    public double getWidth(){
-        return Math.abs(xMax-xMin);
+    //calcul de la largeur de la piece
+    public double getWidth() {
+        return Math.abs(xMax - xMin);
     }
-//calcul de la longueur de la piece
-    public double getHeight(){
-        return Math.abs(yMax-yMin);
+
+    //calcul de la longueur de la piece
+    public double getHeight() {
+        return Math.abs(yMax - yMin);
     }
 
 

@@ -54,11 +54,11 @@ public class RobotsFragment extends Fragment implements Searchable {
         ApiCallback<List<Robot>> listApiCallback = new SimpleApiCallback<List<Robot>>() {
             @Override
             public void onSuccess(List<Robot> result, int statusCode, Map<String, List<String>> responseHeaders) {
-                mainHandler.post(()-> adapter.setRobotList(result));
+                mainHandler.post(() -> adapter.setRobotList(result));
             }
         };
         try {
-            if (searchText.isEmpty()){
+            if (searchText.isEmpty()) {
                 robotApi.listRobotAsync(listApiCallback);
             } else {
                 robotApi.searchRobotAsync(searchText, listApiCallback);

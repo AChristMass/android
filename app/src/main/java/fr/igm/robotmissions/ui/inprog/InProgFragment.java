@@ -40,7 +40,7 @@ public class InProgFragment extends Fragment implements Addable {
         View root = inflater.inflate(R.layout.fragment_inprog, container, false);
         // get main activity
         MainActivity mainActivity = (MainActivity) getActivity();
-        if (mainActivity != null){
+        if (mainActivity != null) {
             mainActivity.changeFragment(this, null);
         }
         recyclerView = root.findViewById(R.id.inprog_list);
@@ -74,7 +74,7 @@ public class InProgFragment extends Fragment implements Addable {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK){
+        if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             loadMissionsInProg();
         }
     }

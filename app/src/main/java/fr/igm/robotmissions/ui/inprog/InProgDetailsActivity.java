@@ -21,7 +21,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.gson.JsonObject;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -70,6 +69,7 @@ public class InProgDetailsActivity extends AppCompatActivity implements JsonMiss
     private NotifService notifService;
     private MissionNotifHandler missionEventHandler;
     private boolean isBound;
+    private ServiceConnection serviceConnection;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -127,7 +127,7 @@ public class InProgDetailsActivity extends AppCompatActivity implements JsonMiss
                 public void onSuccess(List<Robot> result, int statusCode, Map<String, List<String>> responseHeaders) {
 
                     mainHandler.post(() -> {
-                        if (result.isEmpty()){
+                        if (result.isEmpty()) {
                             Toast.makeText(InProgDetailsActivity.this,
                                     getResources().getString(R.string.no_robot),
                                     Toast.LENGTH_SHORT).show();
@@ -141,11 +141,12 @@ public class InProgDetailsActivity extends AppCompatActivity implements JsonMiss
                             }
 
                             @Override
-                            public void onNothingSelected(AdapterView<?> parent) { }
+                            public void onNothingSelected(AdapterView<?> parent) {
+                            }
                         });
 
                         List<String> robotNames = new ArrayList<>();
-                        for(Robot r : result)
+                        for (Robot r : result)
                             robotNames.add(r.getName());
                         robotSpinnerAdapter.addAll(robotNames);
 
@@ -158,7 +159,7 @@ public class InProgDetailsActivity extends AppCompatActivity implements JsonMiss
                 public void onSuccess(List<DeplacementMission> result, int statusCode, Map<String, List<String>> responseHeaders) {
 
                     mainHandler.post(() -> {
-                        if (result.isEmpty()){
+                        if (result.isEmpty()) {
                             Toast.makeText(InProgDetailsActivity.this,
                                     getResources().getString(R.string.no_missions),
                                     Toast.LENGTH_SHORT).show();
@@ -173,11 +174,12 @@ public class InProgDetailsActivity extends AppCompatActivity implements JsonMiss
                             }
 
                             @Override
-                            public void onNothingSelected(AdapterView<?> parent) { }
+                            public void onNothingSelected(AdapterView<?> parent) {
+                            }
                         });
 
                         List<String> missionNames = new ArrayList<>();
-                        for(DeplacementMission dm : result)
+                        for (DeplacementMission dm : result)
                             missionNames.add(dm.getName());
                         missionSpinnerAdapter.addAll(missionNames);
 
@@ -190,20 +192,16 @@ public class InProgDetailsActivity extends AppCompatActivity implements JsonMiss
 
     }
 
-
-    private ServiceConnection serviceConnection;
     private void startMissionNotifService() {
         serviceConnection = new ServiceConnection() {
             @Override
-            public void onServiceConnected(ComponentName componentName, IBinder iBinder)
-            {
-                notifService = ((NotifService.LocalBinder)iBinder).getInstance();
+            public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+                notifService = ((NotifService.LocalBinder) iBinder).getInstance();
                 notifService.setMissionHandler(missionEventHandler);
             }
 
             @Override
-            public void onServiceDisconnected(ComponentName componentName)
-            {
+            public void onServiceDisconnected(ComponentName componentName) {
                 notifService = null;
             }
         };
@@ -219,10 +217,8 @@ public class InProgDetailsActivity extends AppCompatActivity implements JsonMiss
         isBound = true;
     }
 
-    private void doUnbindService()
-    {
-        if (isBound)
-        {
+    private void doUnbindService() {
+        if (isBound) {
             // Detach our existing connection.
             unbindService(serviceConnection);
             isBound = false;
@@ -230,8 +226,7 @@ public class InProgDetailsActivity extends AppCompatActivity implements JsonMiss
     }
 
     @Override
-    protected void onDestroy()
-    {
+    protected void onDestroy() {
         super.onDestroy();
         doUnbindService();
     }
@@ -250,16 +245,16 @@ public class InProgDetailsActivity extends AppCompatActivity implements JsonMiss
         ApiCallback<MissionInProg> callback = new SimpleApiCallback<MissionInProg>() {
             @Override
             public void onSuccess(MissionInProg result, int statusCode, Map<String, List<String>> responseHeaders) {
-                mainHandler.post(()-> {
-                   setResult(Activity.RESULT_OK); // we have created or modified
-                   finish();
-                   Intent intent = getIntent();
-                   intent.putExtra(EXTRA_INPROG, result);
-                   startActivity(intent);
+                mainHandler.post(() -> {
+                    setResult(Activity.RESULT_OK); // we have created or modified
+                    finish();
+                    Intent intent = getIntent();
+                    intent.putExtra(EXTRA_INPROG, result);
+                    startActivity(intent);
                 });
             }
         };
-        missionApi.startMissionAsync(robotSelected.getUuid(),missionSelected.getId(), callback);
+        missionApi.startMissionAsync(robotSelected.getUuid(), missionSelected.getId(), callback);
     }
 
 
@@ -269,11 +264,11 @@ public class InProgDetailsActivity extends AppCompatActivity implements JsonMiss
             // mission is done
             Toast.makeText(this, "Mission done", Toast.LENGTH_SHORT).show();
             finish();
-        } else if (msg.has("position")){
+        } else if (msg.has("position")) {
             // robot position updated
             Log.i("received", "new position");
             JSONObject pos = msg.getJSONObject("position");
-            int [] robotPos = new int [] {pos.getInt("x"), pos.getInt("y")};
+            int[] robotPos = new int[]{pos.getInt("x"), pos.getInt("y")};
             ifcView.setRobotPosition(robotPos);
         }
     }

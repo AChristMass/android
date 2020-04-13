@@ -6,11 +6,8 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.Objects;
 
 public class MissionNotifHandler extends Handler {
     public static final String MISSION_MSG_KEY = "MISSION_MSG";

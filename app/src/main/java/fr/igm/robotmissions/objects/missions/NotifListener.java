@@ -23,14 +23,14 @@ import okio.ByteString;
 
 class NotifListener extends WebSocketListener {
     private static final String CHANNEL_ID = "CHANNEL";
-    private Context context;
-    private Handler mainHandler;
-    private MissionNotifHandler messageHandler;
     private static final int NOTIF_ID = 1;
-    private NotificationManager notificationManager;
     private static final String JSON_ACTION_FIELD = "action";
     private static final String ACTION_MISSION_UPDATE = "update_mission";
     private static final String ACTION_ROBOT_CONNECTION = "robot_connection";
+    private Context context;
+    private Handler mainHandler;
+    private MissionNotifHandler messageHandler;
+    private NotificationManager notificationManager;
 
     NotifListener(Context context, Handler mainHandler) {
         this.context = context;
@@ -82,7 +82,7 @@ class NotifListener extends WebSocketListener {
                     try {
                         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
                                 .setSmallIcon(android.R.drawable.ic_dialog_info)
-                                .setContentTitle("Robot online : "+ robot.getString("name"))
+                                .setContentTitle("Robot online : " + robot.getString("name"))
                                 .setContentText("New robot online")
                                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
                         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
@@ -111,8 +111,8 @@ class NotifListener extends WebSocketListener {
 
 
     public void onFailure(WebSocket webSocket, Throwable t, Response response) {
-        Log.i("notif", "FAILURE : " + t.getCause() );
-        Log.i("notif", "FAILURE : " + t.getMessage() );
+        Log.i("notif", "FAILURE : " + t.getCause());
+        Log.i("notif", "FAILURE : " + t.getMessage());
     }
 
 }

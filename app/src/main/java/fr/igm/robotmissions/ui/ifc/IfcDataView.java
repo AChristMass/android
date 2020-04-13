@@ -11,6 +11,7 @@ import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -34,6 +35,7 @@ import static android.view.MotionEvent.ACTION_UP;
 
 public class IfcDataView extends View implements View.OnTouchListener {
 
+    private static final long TAP_THRESHOLD_MS = 150;
     private final ScaleListener mScaleListener;
     private Paint paint;
     private Paint shadowPaint;
@@ -43,8 +45,6 @@ public class IfcDataView extends View implements View.OnTouchListener {
     private Canvas canvas = new Canvas();
     private Path spacesPath;
     private Path doorsPath;
-    private static final long TAP_THRESHOLD_MS = 150;
-
     private long touchStartTime;
 
 
@@ -85,7 +85,7 @@ public class IfcDataView extends View implements View.OnTouchListener {
         double ifcWidth = ifcData.getDimensions().getWidth();
         double ifcHeight = ifcData.getDimensions().getHeight();
 
-        bmp = Bitmap.createBitmap((int) ifcWidth + offset*2, (int) ifcHeight + offset*2, Bitmap.Config.ARGB_8888);
+        bmp = Bitmap.createBitmap((int) ifcWidth + offset * 2, (int) ifcHeight + offset * 2, Bitmap.Config.ARGB_8888);
         canvas.setBitmap(bmp);
         resetTransformation();
         updatePaths();
@@ -104,8 +104,10 @@ public class IfcDataView extends View implements View.OnTouchListener {
         canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
 
         Path totalPath = new Path();
-        totalPath.op(spacesPath, doorsPath, Path.Op.UNION);
-        canvas.drawPath(totalPath, shadowPaint);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            totalPath.op(spacesPath, doorsPath, Path.Op.UNION);
+            canvas.drawPath(totalPath, shadowPaint);
+        }
         // draw space inner
         paint.setColor(getResources().getColor(R.color.spaceColor));
         paint.setStyle(Paint.Style.FILL);
@@ -143,7 +145,7 @@ public class IfcDataView extends View implements View.OnTouchListener {
             return;
         paint.setColor(color);
         paint.setStyle(Paint.Style.FILL);
-        paint.setStrokeWidth(15/ratio);
+        paint.setStrokeWidth(15 / ratio);
         canvas.drawPoint((float) (point[0] - ifcData.getDimensions().getxMin()),
                 (float) (point[1] - ifcData.getDimensions().getyMin()), paint);
     }
@@ -186,7 +188,7 @@ public class IfcDataView extends View implements View.OnTouchListener {
         }
         pathMatrix.setScale(ratio, ratio);
         pathMatrix.postScale(1, -1);
-        pathMatrix.postTranslate(offset*ratio, (float) (ifcHeight)*ratio);
+        pathMatrix.postTranslate(offset * ratio, (float) (ifcHeight) * ratio);
         mScaleListener.scaleFactor = 1f;
     }
 
@@ -263,24 +265,9 @@ public class IfcDataView extends View implements View.OnTouchListener {
         return true;
     }
 
-
-    public void setStart(float[] start) {
-        this.start = start;
-    }
-
-    public void setEnd(float[] end) {
-        this.end = end;
-    }
-
     public void updateView() {
         drawOnCanvas();
         invalidate();
-    }
-
-    public void setCurrentFloor(String currentFloor) {
-        this.currentFloor = currentFloor;
-        updatePaths();
-
     }
 
     public void focusStart() {
@@ -319,13 +306,38 @@ public class IfcDataView extends View implements View.OnTouchListener {
         this.robot = robotPos;
     }
 
+    public String getCurrentFloor() {
+        return currentFloor;
+    }
+
+    public void setCurrentFloor(String currentFloor) {
+        this.currentFloor = currentFloor;
+        updatePaths();
+
+    }
+
+    public float[] getStart() {
+        return start;
+    }
+
+    public void setStart(float[] start) {
+        this.start = start;
+    }
+
+    public float[] getEnd() {
+        return end;
+    }
+
+    public void setEnd(float[] end) {
+        this.end = end;
+    }
+
     public class ScaleListener
             extends ScaleGestureDetector.SimpleOnScaleGestureListener {
-        float lastFocusX, lastFocusY;
-        float scaleFactor = 1f;
-
         final float MIN_SCALE_FACTOR = 1f;
         final float MAX_SCALE_FACTOR = 2f;
+        float lastFocusX, lastFocusY;
+        float scaleFactor = 1f;
 
         @Override
         public boolean onScaleBegin(ScaleGestureDetector detector) {
@@ -365,17 +377,5 @@ public class IfcDataView extends View implements View.OnTouchListener {
         public float getScaleFactor() {
             return scaleFactor;
         }
-    }
-
-    public String getCurrentFloor() {
-        return currentFloor;
-    }
-
-    public float[] getStart() {
-        return start;
-    }
-
-    public float[] getEnd() {
-        return end;
     }
 }

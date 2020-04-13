@@ -1,8 +1,6 @@
 package fr.igm.robotmissions.objects.ifc;
 
 
-import android.graphics.Point;
-
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -11,13 +9,13 @@ import java.util.Map;
 
 public class IfcFloor implements Serializable {
 
-    
+
     @SerializedName("spacesInfos")
     private Map<String, IfcSpaceInfo> spacesInfos;
 
     @SerializedName("spacesPolygons")
     private Map<String, ArrayList<IfcPoint>> spacesPolygons;
-     
+
     @SerializedName("doorsPolygons")
     private Map<String, ArrayList<IfcPoint>> doorsPolygons;
 

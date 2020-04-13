@@ -63,12 +63,12 @@ public class IfcFragment extends Fragment implements Addable, Searchable {
         ApiCallback<List<Ifc>> listApiCallback = new SimpleApiCallback<List<Ifc>>() {
             @Override
             public void onSuccess(List<Ifc> result, int statusCode, Map<String, List<String>> responseHeaders) {
-                mainHandler.post(()-> adapter.setIfcList(result));
+                mainHandler.post(() -> adapter.setIfcList(result));
             }
 
         };
         try {
-            if (searchText.isEmpty()){
+            if (searchText.isEmpty()) {
                 ifcApi.listIfcAsync(listApiCallback);
             } else {
                 ifcApi.searchIfcAsync(searchText, listApiCallback);

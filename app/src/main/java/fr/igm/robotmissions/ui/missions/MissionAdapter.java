@@ -2,7 +2,6 @@ package fr.igm.robotmissions.ui.missions;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,19 +31,6 @@ public class MissionAdapter extends RecyclerView.Adapter<MissionAdapter.ViewHold
         notifyDataSetChanged();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
-        private final TextView ifcFloorView;
-        private final View cardView;
-        private final TextView nameView;
-        private final TextView ifcNameView;
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            cardView = itemView.findViewById(R.id.mission_card_view);
-            nameView = cardView.findViewById(R.id.mission_name_text);
-            ifcNameView = cardView.findViewById(R.id.mission_ifc_target_name_text);
-            ifcFloorView = cardView.findViewById(R.id.mission_ifc_floor);
-        }
-    }
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -74,6 +60,21 @@ public class MissionAdapter extends RecyclerView.Adapter<MissionAdapter.ViewHold
     @Override
     public int getItemCount() {
         return missionList.size();
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        private final TextView ifcFloorView;
+        private final View cardView;
+        private final TextView nameView;
+        private final TextView ifcNameView;
+
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            cardView = itemView.findViewById(R.id.mission_card_view);
+            nameView = cardView.findViewById(R.id.mission_name_text);
+            ifcNameView = cardView.findViewById(R.id.mission_ifc_target_name_text);
+            ifcFloorView = cardView.findViewById(R.id.mission_ifc_floor);
+        }
     }
 
 

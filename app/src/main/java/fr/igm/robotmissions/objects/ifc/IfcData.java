@@ -1,11 +1,9 @@
 package fr.igm.robotmissions.objects.ifc;
 
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
 import com.google.gson.annotations.SerializedName;
 
-import io.swagger.client.model.DeplacementMission;
+import java.io.Serializable;
+import java.util.HashMap;
 
 public class IfcData implements Serializable {
 
@@ -18,13 +16,13 @@ public class IfcData implements Serializable {
     public HashMap<String, IfcFloor> getFloorMap() {
         return floorMap;
     }
-    
+
     //recuperer les dimensions de l'ifc
     public IfcDimensions getDimensions() {
         return dimensions;
     }
 
-    
+
     //afficher les données relatives à l'ifc
     @Override
     public String toString() {

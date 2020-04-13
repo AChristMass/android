@@ -32,19 +32,6 @@ public class IfcAdapter extends RecyclerView.Adapter<IfcAdapter.ViewHolder> {
         notifyDataSetChanged();
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder {
-        View cardView;
-        TextView nameView;
-        TextView lastUploadView;
-
-        ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            cardView = itemView.findViewById(R.id.ifc_card_view);
-            nameView = cardView.findViewById(R.id.ifc_name_text);
-            lastUploadView = cardView.findViewById(R.id.ifc_last_upload_text);
-        }
-    }
-
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -59,7 +46,7 @@ public class IfcAdapter extends RecyclerView.Adapter<IfcAdapter.ViewHolder> {
 
         // set item text
         holder.nameView.setText(ifc.getName());
-        holder.lastUploadView.setText( Utils.formatDateString(ifc.getLastUpload()));
+        holder.lastUploadView.setText(Utils.formatDateString(ifc.getLastUpload()));
         // set detail intent click
         Context context = holder.cardView.getContext();
         Intent intent = new Intent(context, IfcDetailsActivity.class);
@@ -74,6 +61,19 @@ public class IfcAdapter extends RecyclerView.Adapter<IfcAdapter.ViewHolder> {
     @Override
     public int getItemCount() {
         return ifcList.size();
+    }
+
+    static class ViewHolder extends RecyclerView.ViewHolder {
+        View cardView;
+        TextView nameView;
+        TextView lastUploadView;
+
+        ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            cardView = itemView.findViewById(R.id.ifc_card_view);
+            nameView = cardView.findViewById(R.id.ifc_name_text);
+            lastUploadView = cardView.findViewById(R.id.ifc_last_upload_text);
+        }
     }
 
 

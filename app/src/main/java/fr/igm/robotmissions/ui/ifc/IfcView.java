@@ -3,14 +3,11 @@ package fr.igm.robotmissions.ui.ifc;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -37,23 +34,17 @@ public class IfcView extends ConstraintLayout {
         gson = gsonBuilder.create();
     }
 
-    private Ifc ifc;
     private final IfcDataView ifcDataView;
-
     private final Spinner floorSpinner;
     private final ArrayAdapter<String> floorAdapter;
-
     private final StateImageButton focusStartButton;
     private final StateImageButton editStartButton;
-
     private final StateImageButton focusEndButton;
     private final StateImageButton editEndButton;
-
     private final LinearLayout startLayout;
     private final LinearLayout endLayout;
-
     private final TextView ifcNameText;
-
+    private Ifc ifc;
     private IfcData ifcData;
 
     public IfcView(Context context, AttributeSet attrs) {
@@ -83,7 +74,7 @@ public class IfcView extends ConstraintLayout {
         });
 
         focusStartButton = findViewById(R.id.ifc_view_start_focus_button);
-        focusStartButton.setOnClickListener((_v)->ifcDataView.focusStart());
+        focusStartButton.setOnClickListener((_v) -> ifcDataView.focusStart());
         editStartButton = findViewById(R.id.ifc_view_start_edit_button);
         editStartButton.setOnClickListener(
                 (_v) -> {
@@ -97,7 +88,7 @@ public class IfcView extends ConstraintLayout {
         );
 
         focusEndButton = findViewById(R.id.ifc_view_end_focus_button);
-        focusEndButton.setOnClickListener((_v)->ifcDataView.focusEnd());
+        focusEndButton.setOnClickListener((_v) -> ifcDataView.focusEnd());
         editEndButton = findViewById(R.id.ifc_view_end_edit_button);
         editEndButton.setOnClickListener(
                 (_v) -> {
@@ -120,7 +111,7 @@ public class IfcView extends ConstraintLayout {
     }
 
     private void modifyFloor(String floor) {
-        if (!floor.equals(ifcDataView.getCurrentFloor())){
+        if (!floor.equals(ifcDataView.getCurrentFloor())) {
             ifcDataView.setStart(null);
             ifcDataView.setEnd(null);
             ifcDataView.setCurrentFloor(floor);
@@ -132,22 +123,6 @@ public class IfcView extends ConstraintLayout {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-    }
-
-    public void setIfc(Ifc ifc) {
-        if (ifc.equals(this.ifc)) {
-            ifcDataView.invalidate();
-            return;
-        }
-        this.ifc = ifc;
-
-        resetPositions();
-        floorAdapter.clear();
-
-        ifcData = gson.fromJson(ifc.getData(), IfcData.class);
-        ifcDataView.setIfcData(ifcData);
-        floorAdapter.addAll(ifcData.getFloorMap().keySet());
-        ifcNameText.setText(String.format(getResources().getString(R.string.ifc_view_name), ifc.getName()));
     }
 
     public void setPositions(String floor, float sX, float sY, float eX, float eY) {
@@ -174,7 +149,7 @@ public class IfcView extends ConstraintLayout {
         endLayout.setVisibility(View.GONE);
     }
 
-    public void setPositionEdit(boolean state){
+    public void setPositionEdit(boolean state) {
         editEndButton.setEnabled(state);
         editStartButton.setEnabled(state);
         floorSpinner.setEnabled(state);
@@ -183,6 +158,22 @@ public class IfcView extends ConstraintLayout {
 
     public Ifc getIfc() {
         return ifc;
+    }
+
+    public void setIfc(Ifc ifc) {
+        if (ifc.equals(this.ifc)) {
+            ifcDataView.invalidate();
+            return;
+        }
+        this.ifc = ifc;
+
+        resetPositions();
+        floorAdapter.clear();
+
+        ifcData = gson.fromJson(ifc.getData(), IfcData.class);
+        ifcDataView.setIfcData(ifcData);
+        floorAdapter.addAll(ifcData.getFloorMap().keySet());
+        ifcNameText.setText(String.format(getResources().getString(R.string.ifc_view_name), ifc.getName()));
     }
 
     public String getFloor() {

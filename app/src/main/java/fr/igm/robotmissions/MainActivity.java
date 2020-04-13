@@ -2,26 +2,20 @@ package fr.igm.robotmissions;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import fr.igm.robotmissions.objects.missions.MissionNotifHandler;
-import fr.igm.robotmissions.objects.missions.NotifService;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import static java.security.AccessController.getContext;
+import fr.igm.robotmissions.objects.missions.NotifService;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -58,15 +52,15 @@ public class MainActivity extends AppCompatActivity {
         startService(intent);
     }
 
-    public void changeFragment(Addable addable, Searchable searchable){
-        if (addable != null){
+    public void changeFragment(Addable addable, Searchable searchable) {
+        if (addable != null) {
             addButton.setVisibility(View.VISIBLE);
             addButton.setOnClickListener((_v) -> addable.add());
         } else {
             addButton.setVisibility(View.GONE);
         }
 
-        if (searchable != null){
+        if (searchable != null) {
             searchLayout.setVisibility(View.VISIBLE);
             searchText.setText(null);
             searchButton.setOnClickListener((_v) -> searchable.search(searchText.getText().toString()));

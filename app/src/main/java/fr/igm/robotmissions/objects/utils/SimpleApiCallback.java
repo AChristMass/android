@@ -12,7 +12,7 @@ public abstract class SimpleApiCallback<T> implements ApiCallback<T> {
 
     @Override
     public void onFailure(ApiException e, int statusCode, Map<String, List<String>> responseHeaders) {
-        Log.e("api call error", statusCode+":"+e.getMessage()+e.getResponseBody());
+        Log.e("api call error", statusCode + ":" + e.getMessage() + e.getResponseBody());
     }
 
     @Override

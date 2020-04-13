@@ -7,11 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.provider.DocumentsContract;
-import android.provider.DocumentsProvider;
-import android.provider.MediaStore;
 import android.provider.OpenableColumns;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,7 +22,6 @@ import androidx.core.content.ContextCompat;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -43,7 +38,6 @@ import io.swagger.client.api.IfcApi;
 import io.swagger.client.model.Ifc;
 
 public class IfcDetailsActivity extends AppCompatActivity {
-
 
 
     public static final String EXTRA_IFC = "IFCEXTRA";
@@ -95,13 +89,13 @@ public class IfcDetailsActivity extends AppCompatActivity {
         selectedFileNameTextView = findViewById(R.id.ifc_file_selected_name);
 
         ImageButton clearSelectedFileButton = findViewById(R.id.ifc_clear_selected_file_btn);
-        clearSelectedFileButton.setOnClickListener((_v)-> clearSelectedFile());
+        clearSelectedFileButton.setOnClickListener((_v) -> clearSelectedFile());
         loadFileButton = findViewById(R.id.ifc_load_file_button);
 
         IfcView ifcView = findViewById(R.id.ifc_ifc_view);
         isCreating = ifc == null;
         isEditing = false;
-        if (isCreating){
+        if (isCreating) {
             editIfc();
             ifcView.setVisibility(View.GONE);
             editButton.setVisibility(View.GONE);
@@ -133,7 +127,7 @@ public class IfcDetailsActivity extends AppCompatActivity {
         ApiCallback<Ifc> callback = new SimpleApiCallback<Ifc>() {
             @Override
             public void onSuccess(Ifc result, int statusCode, Map<String, List<String>> responseHeaders) {
-                mainHandler.post(()-> {
+                mainHandler.post(() -> {
                     setResult(Activity.RESULT_OK); // we have created or modified
                     finish();
                     Intent intent = getIntent();
@@ -144,13 +138,13 @@ public class IfcDetailsActivity extends AppCompatActivity {
         };
 
         String name = ifcNameEditTextView.getText().toString();
-        if (name.isEmpty()){
+        if (name.isEmpty()) {
             Toast.makeText(this,
                     getResources().getString(R.string.name_empty),
                     Toast.LENGTH_SHORT).show();
             return;
         }
-        if (isCreating){
+        if (isCreating) {
             if (selectedFile == null) {
                 Toast.makeText(this,
                         getResources().getString(R.string.ifc_need_to_select_file),
@@ -203,12 +197,12 @@ public class IfcDetailsActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == PICKFILE_REQUEST_CODE && resultCode == RESULT_OK && data != null){
+        if (requestCode == PICKFILE_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
             Uri fileUri = data.getData();
 
             String fileName = getFileName(fileUri);
-            String fileExt = fileName.substring(fileName.lastIndexOf(".")+1).toLowerCase();
-            if (!fileExt.equals("ifc")){
+            String fileExt = fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase();
+            if (!fileExt.equals("ifc")) {
                 Toast.makeText(this, getResources().getString(R.string.ifc_file_not_ifc), Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -257,17 +251,5 @@ public class IfcDetailsActivity extends AppCompatActivity {
             }
         }
         return result;
-    }
-
-    public String getPath(Uri uri)
-    {
-        String[] projection = { MediaStore.Images.Media.DATA };
-        Cursor cursor = getContentResolver().query(uri, projection, null, null, null);
-        if (cursor == null) return null;
-        int column_index =             cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-        cursor.moveToFirst();
-        String s=cursor.getString(column_index);
-        cursor.close();
-        return s;
     }
 }

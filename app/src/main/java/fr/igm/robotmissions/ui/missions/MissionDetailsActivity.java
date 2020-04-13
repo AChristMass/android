@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -20,7 +19,6 @@ import androidx.core.content.ContextCompat;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -108,7 +106,7 @@ public class MissionDetailsActivity extends AppCompatActivity {
                             }
                         });
 
-                        if (isCreating){
+                        if (isCreating) {
                             ifcSpinner.setSelection(0);
                             ifcView.setVisibility(View.VISIBLE);
                         }
@@ -141,17 +139,17 @@ public class MissionDetailsActivity extends AppCompatActivity {
         ApiCallback<DeplacementMission> callback = new SimpleApiCallback<DeplacementMission>() {
             @Override
             public void onSuccess(DeplacementMission result, int statusCode, Map<String, List<String>> responseHeaders) {
-                mainHandler.post(()-> {
-                   setResult(Activity.RESULT_OK); // we have created or modified
-                   finish();
-                   Intent intent = getIntent();
-                   intent.putExtra(EXTRA_MISSION, result);
-                   startActivity(intent);
+                mainHandler.post(() -> {
+                    setResult(Activity.RESULT_OK); // we have created or modified
+                    finish();
+                    Intent intent = getIntent();
+                    intent.putExtra(EXTRA_MISSION, result);
+                    startActivity(intent);
                 });
             }
         };
         String name = nameEditText.getText().toString();
-        if (name.isEmpty()){
+        if (name.isEmpty()) {
             Toast.makeText(this,
                     getResources().getString(R.string.name_empty),
                     Toast.LENGTH_SHORT).show();
@@ -159,15 +157,15 @@ public class MissionDetailsActivity extends AppCompatActivity {
         }
         int ifcId = ifcView.getIfc().getId();
         String floor = ifcView.getFloor();
-        int [] start = Utils.floatArrayToIntArray(ifcView.getStartPosition());
-        int [] end = Utils.floatArrayToIntArray(ifcView.getEndPosition());
+        int[] start = Utils.floatArrayToIntArray(ifcView.getStartPosition());
+        int[] end = Utils.floatArrayToIntArray(ifcView.getEndPosition());
         if (start == null || end == null) {
             Toast.makeText(this, getResources().getString(R.string.please_select_position), Toast.LENGTH_SHORT).show();
             return;
         }
-        if (isCreating){
+        if (isCreating) {
             missionApi.postMissionAsync(name, ifcId, floor, start[0], start[1], end[0], end[1], callback);
-        }else {
+        } else {
             missionApi.updateMissionAsync(mission.getId(), name, ifcId, floor, start[0], start[1], end[0], end[1], callback);
         }
     }
