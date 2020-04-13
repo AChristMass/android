@@ -112,6 +112,7 @@ class NotifListener extends WebSocketListener {
 
     public void onFailure(WebSocket webSocket, Throwable t, Response response) {
         Log.i("notif", "FAILURE : " + t.getCause() );
+        Log.i("notif", "FAILURE : " + t.getMessage() );
     }
 
 }
